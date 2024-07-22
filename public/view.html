@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spotify Current Playing Track</title>
+    <style>
+        #album-cover {
+            width: 300px; /* Adjust size as needed */
+            height: 300px; /* Adjust size as needed */
+            object-fit: cover; /* Ensures the image covers the div proportionally */
+            border-radius: 15px; /* Optional: Adds rounded corners to the image */
+        }
+    </style>
+</head>
+<body>
+    <h1>Currently Playing on Spotify</h1>
+    <img id="album-cover" src="" alt="Album Cover">
+
+    <script>
+        async function fetchAlbumCover() {
+            try {
+                const response = await fetch('http://localhost:5002/album-cover');
+                const data = await response.json();
+                if (data.albumCoverUrl) {
+                    document.getElementById('album-cover').src = data.albumCoverUrl;
+                } else {
+                    // Optional: Set a default image if no album cover URL is found
+                    document.getElementById('album-cover').src = 'path/to/default-image.jpg';
+                }
+            } catch (error) {
+                console.error('Error fetching album cover:', error);
+                // Optional: Set an error image or message if the fetch fails
+                document.getElementById('album-cover').src = 'path/to/error-image.jpg';
+            }
+        }
+
+        // Poll for the current album cover every 10 seconds
+        setInterval(fetchAlbumCover, 1000);
+
+        // Fetch the current album cover as soon as the page loads
+        fetchAlbumCover();
+    </script>
+</body>
+</html>
