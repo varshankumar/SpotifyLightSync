@@ -1,0 +1,1 @@
+Spotify Light Sync is an innovative project designed to synchronize smart lights with the music played on Spotify. By using the Spotify API and smart lighting systems, this project creates an immersive audiovisual experience that enhances your music listening sessions.
